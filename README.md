@@ -2,6 +2,8 @@
 
 This project uses a trained TensorFlow model and a Streamlit front end to classify uploaded images as either a cat or a dog.
 
+Deployed link : https://cnn-petimages.streamlit.app/
+
 ## Files
 
 - `app.py` - Streamlit app
