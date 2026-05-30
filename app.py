@@ -1,9 +1,13 @@
+import os
 from pathlib import Path
 
 import numpy as np
 import streamlit as st
 from PIL import Image
-import tensorflow as tf
+
+os.environ["KERAS_BACKEND"] = "numpy"
+
+import keras
 
 
 st.set_page_config(page_title="Cat vs Dog Classifier", page_icon="🐾", layout="centered")
@@ -17,12 +21,12 @@ CLASS_NAMES = {0: "Cat", 1: "Dog"}
 
 
 @st.cache_resource
-def load_model() -> tf.keras.Model:
+def load_model() -> keras.Model:
     if not MODEL_PATH.exists():
         raise FileNotFoundError(
             f"Model file not found: {MODEL_PATH.name}. Put the .keras file in the same folder as app.py."
         )
-    return tf.keras.models.load_model(MODEL_PATH)
+    return keras.saving.load_model(MODEL_PATH, compile=False)
 
 
 def prepare_image(image: Image.Image) -> np.ndarray:
